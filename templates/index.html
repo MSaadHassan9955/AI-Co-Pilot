@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>AI Co-Pilot | Submit Claim</title>
+<style>
+  body { font-family: -apple-system, Segoe UI, Roboto, sans-serif; background:#0f1420; color:#e8ecf5; margin:0; padding:0;}
+  .wrap { max-width: 640px; margin: 40px auto; padding: 32px; background:#1a2032; border-radius: 14px; box-shadow: 0 8px 30px rgba(0,0,0,.4);}
+  h1 { font-size: 22px; margin-bottom:4px;}
+  p.sub { color:#9aa4bf; margin-top:0; margin-bottom:24px;}
+  label { display:block; margin: 16px 0 6px; font-size: 13px; color:#b7c0da; font-weight:600;}
+  input[type=text], input[type=number], select, textarea {
+    width:100%; padding:10px 12px; border-radius:8px; border:1px solid #2c3450;
+    background:#0f1420; color:#e8ecf5; font-size:14px; box-sizing:border-box;
+  }
+  textarea { min-height: 70px; resize: vertical;}
+  input[type=file] { color:#9aa4bf; }
+  button { margin-top:26px; width:100%; padding:13px; border:none; border-radius:9px;
+    background: linear-gradient(135deg,#5b7cfa,#7b5bfa); color:white; font-size:15px; font-weight:600; cursor:pointer;}
+  button:hover { opacity:.92; }
+  .badge { display:inline-block; background:#232b45; color:#8fd0ff; font-size:11px; padding:3px 9px; border-radius:20px; margin-bottom:16px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="badge">AI Claims Co-Pilot &middot; Insurance</div>
+  <h1>Submit a Damage Claim</h1>
+  <p class="sub">Upload a photo, describe what happened, and provide claim details.</p>
+  <form action="/predict" method="post" enctype="multipart/form-data">
+    <label>Damage photo</label>
+    <input type="file" name="photo" accept="image/*" required>
+
+    <label>Description of the incident</label>
+    <textarea name="description" placeholder="e.g. Rear bumper hit in a parking lot..." required></textarea>
+
+    <label>Vehicle age (years)</label>
+    <input type="number" name="vehicle_age" min="0" max="30" value="5" required>
+
+    <label>Claimed amount ($)</label>
+    <input type="number" name="claimed_amount" min="0" step="0.01" value="1500" required>
+
+    <label>Policy type</label>
+    <select name="policy_type">
+      <option>Basic</option>
+      <option selected>Standard</option>
+      <option>Premium</option>
+    </select>
+
+    <button type="submit">Run AI Co-Pilot Analysis &rarr;</button>
+  </form>
+</div>
+</body>
+</html>

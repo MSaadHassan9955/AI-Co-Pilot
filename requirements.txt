@@ -1,0 +1,9 @@
+flask
+scikit-learn
+scikit-image
+pillow
+numpy
+reportlab
+requests
+python-dotenv
+joblib

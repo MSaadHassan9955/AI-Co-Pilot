@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Claim #{{ claim_id }} Finalized</title>
+<style>
+  body { font-family: -apple-system, Segoe UI, Roboto, sans-serif; background:#0f1420; color:#e8ecf5; display:flex; align-items:center; justify-content:center; height:100vh; margin:0;}
+  .card { background:#1a2032; padding:40px; border-radius:16px; text-align:center; max-width:420px; box-shadow:0 8px 30px rgba(0,0,0,.4);}
+  h1 { font-size:20px; margin-bottom:8px;}
+  p { color:#9aa4bf; font-size:14px; }
+  a.btn { display:inline-block; margin-top:20px; padding:12px 22px; background: linear-gradient(135deg,#5b7cfa,#7b5bfa); color:white; border-radius:9px; text-decoration:none; font-weight:600;}
+  a.new { display:block; margin-top:14px; color:#8fd0ff; font-size:13px; text-decoration:none;}
+  .pill { display:inline-block; padding:4px 14px; border-radius:20px; font-weight:700; font-size:13px; margin-bottom:12px;}
+  .approved { background:#1e3a2a; color:#7be8a3;}
+  .rejected { background:#3a1e1e; color:#f08080;}
+  .edited { background:#232b45; color:#8fd0ff;}
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="pill {{ decision }}">{{ decision.upper() }}</div>
+    <h1>Claim #{{ claim_id }} finalized</h1>
+    <p>The report has been generated with the AI prediction, explainability heatmap, and your review decision.</p>
+    <a class="btn" href="/download/{{ claim_id }}">Download PDF Report</a>
+    <a class="new" href="/">&larr; Submit another claim</a>
+  </div>
+</body>
+</html>
