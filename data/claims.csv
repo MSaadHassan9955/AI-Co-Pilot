@@ -1,0 +1,71 @@
+claim_id,image_path,description,vehicle_age,claimed_amount,policy_type,severity_label,damage_area_ratio
+2001,data/images/moderate/10.jpg,Noticeable dent on the driver-side door after a low-speed collision.,5,2413.55,Standard,moderate,0.0111
+2002,data/images/minor/13.jpg,Minor paint chip near the door handle after a shopping cart bump.,6,396.6,Premium,minor,0.00465
+2003,data/images/moderate/14.jpg,Noticeable dent on the driver-side door after a low-speed collision.,6,2366.33,Standard,moderate,0.01603
+2004,data/images/minor/15.jpg,Minor paint chip near the door handle after a shopping cart bump.,7,307.84,Premium,minor,0.00332
+2005,data/images/minor/16.jpg,Minor paint chip near the door handle after a shopping cart bump.,7,306.63,Premium,minor,0.00699
+2006,data/images/minor/17.jpg,"Light scuff mark on the front fender, no dents visible.",3,288.2,Premium,minor,0.0054
+2007,data/images/moderate/18.jpg,Multiple scratches and a dent on the trunk lid from a reversing accident.,5,2446.84,Basic,moderate,0.02027
+2008,data/images/minor/19.jpg,"Light scuff mark on the front fender, no dents visible.",3,322.62,Basic,minor,0.00203
+2009,data/images/moderate/2.jpg,Cracked headlight and bent bumper panel from a rear-end tap.,7,2792.79,Standard,moderate,0.0201
+2010,data/images/severe/20.jpg,"Side panel caved in, airbags deployed, extensive structural damage.",1,7019.19,Premium,severe,0.04209
+2011,data/images/moderate/21.jpg,Noticeable dent on the driver-side door after a low-speed collision.,0,2196.55,Standard,moderate,0.02426
+2012,data/images/minor/23.jpg,"Light scuff mark on the front fender, no dents visible.",0,263.76,Premium,minor,0.00369
+2013,data/images/moderate/25.jpg,Multiple scratches and a dent on the trunk lid from a reversing accident.,1,2135.28,Basic,moderate,0.0208
+2014,data/images/severe/26.jpg,Major front-end collision with crumpled hood and shattered headlight.,5,10473.55,Basic,severe,0.07348
+2015,data/images/severe/27.jpg,"Vehicle rear totaled after highway collision, frame damage suspected.",7,7690.42,Standard,severe,0.03406
+2016,data/images/moderate/29.jpg,Noticeable dent on the driver-side door after a low-speed collision.,6,2242.72,Standard,moderate,0.01453
+2017,data/images/severe/30.jpg,"Vehicle rear totaled after highway collision, frame damage suspected.",3,6544.67,Premium,severe,0.08138
+2018,data/images/moderate/31.jpg,Multiple scratches and a dent on the trunk lid from a reversing accident.,9,2807.89,Premium,moderate,0.01781
+2019,data/images/moderate/33.jpg,Multiple scratches and a dent on the trunk lid from a reversing accident.,5,3056.65,Standard,moderate,0.01334
+2020,data/images/severe/34.jpg,Major front-end collision with crumpled hood and shattered headlight.,4,7826.87,Standard,severe,0.03647
+2021,data/images/severe/36.jpg,"Side panel caved in, airbags deployed, extensive structural damage.",5,9455.83,Standard,severe,0.04172
+2022,data/images/minor/37.jpg,Minor paint chip near the door handle after a shopping cart bump.,5,341.05,Premium,minor,0.00256
+2023,data/images/moderate/38.jpg,Multiple scratches and a dent on the trunk lid from a reversing accident.,3,3170.45,Standard,moderate,0.02414
+2024,data/images/minor/39.jpg,Minor paint chip near the door handle after a shopping cart bump.,3,312.03,Basic,minor,0.00954
+2025,data/images/severe/4.jpg,"Side panel caved in, airbags deployed, extensive structural damage.",3,8471.42,Premium,severe,0.11858
+2026,data/images/severe/40.jpg,Major front-end collision with crumpled hood and shattered headlight.,7,7911.63,Basic,severe,0.12043
+2027,data/images/severe/41.jpg,Major front-end collision with crumpled hood and shattered headlight.,4,8952.99,Basic,severe,0.12274
+2028,data/images/severe/43.jpg,"Side panel caved in, airbags deployed, extensive structural damage.",6,9870.89,Premium,severe,0.04464
+2029,data/images/minor/44.jpg,"Light scuff mark on the front fender, no dents visible.",3,266.33,Premium,minor,0.00094
+2030,data/images/moderate/46.jpg,Multiple scratches and a dent on the trunk lid from a reversing accident.,0,2257.87,Basic,moderate,0.01251
+2031,data/images/moderate/47.jpg,Cracked headlight and bent bumper panel from a rear-end tap.,4,1756.2,Premium,moderate,0.02101
+2032,data/images/moderate/48.jpg,Cracked headlight and bent bumper panel from a rear-end tap.,5,2047.16,Standard,moderate,0.01246
+2033,data/images/minor/49.jpg,Minor paint chip near the door handle after a shopping cart bump.,5,304.05,Premium,minor,0.0033
+2034,data/images/severe/5.jpg,"Vehicle rear totaled after highway collision, frame damage suspected.",5,11113.63,Basic,severe,0.0574
+2035,data/images/severe/50.jpg,"Vehicle rear totaled after highway collision, frame damage suspected.",10,7100.82,Standard,severe,0.02868
+2036,data/images/minor/51.jpg,Small scratch on the rear bumper from a parking lot incident.,3,298.08,Standard,minor,0.00965
+2037,data/images/severe/52.jpg,Major front-end collision with crumpled hood and shattered headlight.,0,8234.44,Premium,severe,0.02945
+2038,data/images/minor/53.jpg,"Light scuff mark on the front fender, no dents visible.",2,259.53,Basic,minor,0.01104
+2039,data/images/minor/54.jpg,Small scratch on the rear bumper from a parking lot incident.,9,221.8,Standard,minor,0.00013
+2040,data/images/minor/55.jpg,Small scratch on the rear bumper from a parking lot incident.,11,343.81,Basic,minor,0.00925
+2041,data/images/moderate/56.jpg,Noticeable dent on the driver-side door after a low-speed collision.,4,1585.9,Premium,moderate,0.0151
+2042,data/images/moderate/57.jpg,Noticeable dent on the driver-side door after a low-speed collision.,7,2909.99,Premium,moderate,0.0269
+2043,data/images/severe/58.jpg,Major front-end collision with crumpled hood and shattered headlight.,4,12636.48,Standard,severe,0.07336
+2044,data/images/moderate/59.jpg,Noticeable dent on the driver-side door after a low-speed collision.,10,2137.63,Premium,moderate,0.01394
+2045,data/images/severe/6.jpg,"Vehicle rear totaled after highway collision, frame damage suspected.",4,7232.61,Premium,severe,0.14014
+2046,data/images/severe/61.jpg,Major front-end collision with crumpled hood and shattered headlight.,0,11756.03,Standard,severe,0.0385
+2047,data/images/minor/63.jpg,Minor paint chip near the door handle after a shopping cart bump.,5,321.82,Basic,minor,0.01002
+2048,data/images/minor/64.jpg,Small scratch on the rear bumper from a parking lot incident.,1,273.43,Basic,minor,0.0069
+2049,data/images/moderate/68.jpg,Noticeable dent on the driver-side door after a low-speed collision.,5,2331.89,Basic,moderate,0.01199
+2050,data/images/minor/69.jpg,"Light scuff mark on the front fender, no dents visible.",6,282.24,Basic,minor,0.0009
+2051,data/images/severe/7.jpg,"Vehicle rear totaled after highway collision, frame damage suspected.",4,7908.57,Basic,severe,0.04401
+2052,data/images/minor/70.jpg,Small scratch on the rear bumper from a parking lot incident.,9,269.23,Standard,minor,0.00628
+2053,data/images/moderate/71.jpg,Noticeable dent on the driver-side door after a low-speed collision.,6,1613.74,Basic,moderate,0.0117
+2054,data/images/severe/73.jpg,"Side panel caved in, airbags deployed, extensive structural damage.",8,10093.62,Standard,severe,0.03906
+2055,data/images/minor/75.jpg,Minor paint chip near the door handle after a shopping cart bump.,0,319.95,Premium,minor,0.0051
+2056,data/images/minor/76.jpg,Minor paint chip near the door handle after a shopping cart bump.,6,297.29,Standard,minor,0.00657
+2057,data/images/minor/77.jpg,Small scratch on the rear bumper from a parking lot incident.,2,401.04,Basic,minor,0.00748
+2058,data/images/minor/79.jpg,Small scratch on the rear bumper from a parking lot incident.,6,360.9,Standard,minor,0.0085
+2059,data/images/moderate/80.jpg,Cracked headlight and bent bumper panel from a rear-end tap.,5,2873.01,Basic,moderate,0.01687
+2060,data/images/severe/1.jpg,Major front-end collision with crumpled hood and shattered headlight.,7,5689.38,Basic,severe,0.05361
+2061,data/images/moderate/22.jpg,Noticeable dent on the driver-side door after a low-speed collision.,3,1990.59,Basic,moderate,0.01713
+2062,data/images/severe/24.jpg,"Side panel caved in, airbags deployed, extensive structural damage.",10,7438.69,Basic,severe,0.03272
+2063,data/images/minor/3.jpg,Small scratch on the rear bumper from a parking lot incident.,3,303.75,Standard,minor,0.00253
+2064,data/images/moderate/32.jpg,Cracked headlight and bent bumper panel from a rear-end tap.,5,2528.23,Standard,moderate,0.0124
+2065,data/images/severe/42.jpg,"Side panel caved in, airbags deployed, extensive structural damage.",10,7593.8,Standard,severe,0.03551
+2066,data/images/moderate/62.jpg,Multiple scratches and a dent on the trunk lid from a reversing accident.,3,1735.47,Premium,moderate,0.02239
+2067,data/images/moderate/74.jpg,Noticeable dent on the driver-side door after a low-speed collision.,5,2215.71,Standard,moderate,0.01495
+2068,data/images/severe/78.jpg,Major front-end collision with crumpled hood and shattered headlight.,9,8537.38,Premium,severe,0.02973
+2069,data/images/severe/8.jpg,"Side panel caved in, airbags deployed, extensive structural damage.",5,8382.44,Premium,severe,0.04651
+2070,data/images/severe/9.jpg,Major front-end collision with crumpled hood and shattered headlight.,0,8936.91,Basic,severe,0.03241

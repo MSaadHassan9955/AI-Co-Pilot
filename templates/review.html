@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Adjuster Review | Claim #{{ claim.claim_id }}</title>
+<style>
+  body { font-family: -apple-system, Segoe UI, Roboto, sans-serif; background:#0f1420; color:#e8ecf5; margin:0; }
+  .wrap { max-width: 900px; margin: 30px auto; padding: 0 20px 60px;}
+  .badge { display:inline-block; background:#232b45; color:#8fd0ff; font-size:11px; padding:3px 9px; border-radius:20px; margin-bottom:10px;}
+  h1 { font-size: 22px; margin: 4px 0 20px;}
+  .grid { display:grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .card { background:#1a2032; border-radius:14px; padding:20px; box-shadow:0 8px 30px rgba(0,0,0,.35);}
+  .imgs { display:flex; gap:12px; }
+  .imgs figure { margin:0; flex:1; text-align:center;}
+  .imgs img { width:100%; border-radius:10px; border:1px solid #2c3450;}
+  .imgs figcaption { font-size:11px; color:#9aa4bf; margin-top:6px;}
+  .conf-row { display:flex; align-items:center; gap:10px; margin:6px 0; font-size:13px;}
+  .conf-bar-bg { flex:1; background:#0f1420; border-radius:6px; height:10px; overflow:hidden; border:1px solid #2c3450;}
+  .conf-bar { height:100%; background: linear-gradient(90deg,#5b7cfa,#7b5bfa); }
+  .pill { display:inline-block; padding:4px 12px; border-radius:20px; font-weight:700; font-size:13px;}
+  .pill.minor { background:#1e3a2a; color:#7be8a3;}
+  .pill.moderate { background:#3a341e; color:#f0c060;}
+  .pill.severe { background:#3a1e1e; color:#f08080;}
+  .summary { font-size:14px; line-height:1.55; color:#cdd4e8; }
+  label { display:block; margin:14px 0 6px; font-size:13px; color:#b7c0da; font-weight:600;}
+  select, input[type=number], textarea {
+    width:100%; padding:9px 10px; border-radius:8px; border:1px solid #2c3450;
+    background:#0f1420; color:#e8ecf5; font-size:14px; box-sizing:border-box;
+  }
+  textarea { min-height:60px; }
+  .btn-row { display:flex; gap:10px; margin-top:20px;}
+  button { flex:1; padding:12px; border:none; border-radius:9px; font-size:14px; font-weight:700; cursor:pointer;}
+  .approve { background:#1e3a2a; color:#7be8a3; }
+  .reject { background:#3a1e1e; color:#f08080; }
+  .edit { background:#232b45; color:#8fd0ff; }
+  h3 { font-size:14px; color:#9aa4bf; text-transform:uppercase; letter-spacing:.04em; margin-bottom:10px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="badge">Human-in-the-Loop &middot; Adjuster Console</div>
+  <h1>Claim #{{ claim.claim_id }} &mdash; Review Required</h1>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Evidence & Explainability</h3>
+      <div class="imgs">
+        <figure>
+          <img src="/{{ claim.original_image_rel }}">
+          <figcaption>Original Photo</figcaption>
+        </figure>
+        <figure>
+          <img src="/{{ claim.heatmap_image_rel }}">
+          <figcaption>XAI Heatmap (red = influential region)</figcaption>
+        </figure>
+      </div>
+
+      <h3 style="margin-top:20px;">Model Confidence</h3>
+      {% for cls, conf in claim.all_confidences.items() %}
+      <div class="conf-row">
+        <span style="width:75px;">{{ cls.capitalize() }}</span>
+        <div class="conf-bar-bg"><div class="conf-bar" style="width:{{ (conf*100)|round(1) }}%;"></div></div>
+        <span style="width:45px; text-align:right;">{{ (conf*100)|round(1) }}%</span>
+      </div>
+      {% endfor %}
+
+      <div style="margin-top:14px;">
+        Predicted severity:
+        <span class="pill {{ claim.predicted_class }}">{{ claim.predicted_class.upper() }}</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>AI Co-Pilot Summary</h3>
+      <p class="summary">{{ claim.summary }}</p>
+      <p style="margin-top:14px; font-size:14px;">Suggested payout: <b>${{ '%.2f'|format(claim.suggested_payout) }}</b></p>
+
+      <form action="/finalize" method="post">
+        <input type="hidden" name="claim_id" value="{{ claim.claim_id }}">
+        <label>Final payout amount ($)</label>
+        <input type="number" step="0.01" name="final_payout" value="{{ claim.suggested_payout }}">
+
+        <label>Adjuster notes (optional)</label>
+        <textarea name="adjuster_notes" placeholder="Any reasoning for approve/reject/edit..."></textarea>
+
+        <div class="btn-row">
+          <button type="submit" name="decision" value="approved" class="approve">Approve</button>
+          <button type="submit" name="decision" value="edited" class="edit">Approve w/ Edit</button>
+          <button type="submit" name="decision" value="rejected" class="reject">Reject</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>
