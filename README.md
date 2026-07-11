@@ -1,3 +1,19 @@
+---
+title: Hackathon Ai Coplit
+emoji: 🚗
+colorFrom: blue
+colorTo: purple
+sdk: docker
+pinned: false
+---
+
+
+
+
+
+
+
+
 # AI Co-Pilot for Insurance Claim Processing
 
 An AI Co-Pilot that speeds up auto-insurance claim triage: a claimant uploads a
