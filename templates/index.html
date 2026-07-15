@@ -2,52 +2,145 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>AI Co-Pilot | Submit Claim</title>
+<title>Insurance System Co-Pilot | Submit Claim</title>
 <style>
-  body { font-family: -apple-system, Segoe UI, Roboto, sans-serif; background:#0f1420; color:#e8ecf5; margin:0; padding:0;}
-  .wrap { max-width: 640px; margin: 40px auto; padding: 32px; background:#1a2032; border-radius: 14px; box-shadow: 0 8px 30px rgba(0,0,0,.4);}
-  h1 { font-size: 22px; margin-bottom:4px;}
-  p.sub { color:#9aa4bf; margin-top:0; margin-bottom:24px;}
-  label { display:block; margin: 16px 0 6px; font-size: 13px; color:#b7c0da; font-weight:600;}
-  input[type=text], input[type=number], select, textarea {
-    width:100%; padding:10px 12px; border-radius:8px; border:1px solid #2c3450;
-    background:#0f1420; color:#e8ecf5; font-size:14px; box-sizing:border-box;
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, Segoe UI, Roboto, sans-serif; background:#0a0e27; color:#e8ecf5; margin:0; padding:0;}
+
+  .navbar { display:flex; align-items:center; justify-content:space-between; padding:16px 32px;
+    background:#1a1035; border-bottom:1px solid #2e1f5e; }
+  .navbar .logo { display:flex; align-items:center; gap:10px; font-weight:700; font-size:16px; letter-spacing:.03em; }
+  .navbar .logo-icon { width:32px; height:32px; border-radius:50%;
+    background: linear-gradient(135deg,#7b2ff7,#00e5ff); display:flex; align-items:center; justify-content:center; font-size:16px; }
+  .navbar .tag { font-size:12px; color:#9aa4bf; }
+
+  .hero { text-align:center; padding: 20px 20px 8px; }
+  .hero h1 { font-size:26px; margin:0 0 8px; color:#e8ecf5; }
+  .hero p { color:#9aa4bf; font-size:14px; margin:0; }
+
+  .page { max-width: 900px; margin: 20px auto 60px; padding: 0 20px; }
+
+  .panel { background:#1a1035; border-radius: 22px; border:1px solid #2e1f5e;
+    box-shadow: 0 12px 40px rgba(0,0,0,.5); padding: 36px 40px 40px; }
+
+  .panel-header { text-align:center; margin-bottom: 30px; }
+  .badge { display:inline-block; background:#2e1f5e; color:#00e5ff; font-size:11px; padding:4px 12px;
+    border-radius:20px; margin-bottom:14px; letter-spacing:.05em; font-weight:700; }
+  .panel-header h1 { font-size:24px; margin:0 0 8px; letter-spacing:.03em;
+    background: linear-gradient(90deg,#00e5ff,#a855f7); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .panel-header p { color:#9aa4bf; font-size:14px; margin:0; max-width:440px; margin:0 auto; }
+
+  .form-grid { display:grid; grid-template-columns: 1fr 1.4fr; gap: 24px; align-items:stretch; }
+
+  .upload-box { background:#0a0e27; border:2px dashed #3a2a6e; border-radius:16px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding: 28px 16px; text-align:center; }
+  .upload-box .icon { width:52px; height:52px; border-radius:14px; margin-bottom:14px;
+    background: linear-gradient(135deg,#7b2ff7,#00e5ff); display:flex; align-items:center; justify-content:center; font-size:24px; }
+  .upload-box label.title { font-size:14px; font-weight:700; color:#e8ecf5; margin-bottom:6px; }
+  .upload-box p { font-size:12px; color:#8a90ad; margin:0 0 14px; }
+  .upload-box input[type=file] { color:#9aa4bf; font-size:12px; text-align:center; }
+
+  .fields-box { background:#0a0e27; border:1px solid #2e1f5e; border-radius:16px; padding: 22px 24px; }
+  .fields-box label { display:block; margin: 0 0 6px; font-size: 12px; color:#b7c0da; font-weight:600;}
+  .fields-box .field { margin-bottom: 16px; }
+  .fields-box .field:last-child { margin-bottom: 0; }
+  input[type=number], select, textarea {
+    width:100%; padding:10px 12px; border-radius:8px; border:1px solid #3a2a6e;
+    background:#151233; color:#e8ecf5; font-size:14px; box-sizing:border-box;
   }
-  textarea { min-height: 70px; resize: vertical;}
-  input[type=file] { color:#9aa4bf; }
-  button { margin-top:26px; width:100%; padding:13px; border:none; border-radius:9px;
-    background: linear-gradient(135deg,#5b7cfa,#7b5bfa); color:white; font-size:15px; font-weight:600; cursor:pointer;}
-  button:hover { opacity:.92; }
-  .badge { display:inline-block; background:#232b45; color:#8fd0ff; font-size:11px; padding:3px 9px; border-radius:20px; margin-bottom:16px;}
+  input:focus, select:focus, textarea:focus { outline:none; border-color:#00e5ff; }
+  textarea { min-height: 64px; resize: vertical;}
+
+  .submit-row { text-align:center; margin-top: 28px; }
+  button { padding:13px 48px; border:none; border-radius:9px;
+    background: linear-gradient(135deg,#7b2ff7,#00e5ff); color:#0a0e27; font-size:15px; font-weight:700; cursor:pointer;}
+  button:hover { opacity:.9; }
+
+  .steps { display:flex; gap:14px; max-width:900px; margin:0 auto 24px; padding:0 20px; }
+  .step { flex:1; background:#1a1035; border:1px solid #2e1f5e; border-radius:10px; padding:12px; text-align:center; font-size:12px; color:#9aa4bf;}
+  .step b { display:block; color:#00e5ff; font-size:13px; margin-bottom:2px;}
+
+  footer { text-align:center; padding:24px; color:#5f6a8a; font-size:12px; }
+  footer a { color:#00e5ff; text-decoration:none; }
+
+  @media (max-width: 640px) {
+    .form-grid { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="badge">AI Claims Co-Pilot &middot; Insurance</div>
-  <h1>Submit a Damage Claim</h1>
-  <p class="sub">Upload a photo, describe what happened, and provide claim details.</p>
-  <form action="/predict" method="post" enctype="multipart/form-data">
-    <label>Damage photo</label>
-    <input type="file" name="photo" accept="image/*" required>
 
-    <label>Description of the incident</label>
-    <textarea name="description" placeholder="e.g. Rear bumper hit in a parking lot..." required></textarea>
-
-    <label>Vehicle age (years)</label>
-    <input type="number" name="vehicle_age" min="0" max="30" value="5" required>
-
-    <label>Claimed amount ($)</label>
-    <input type="number" name="claimed_amount" min="0" step="0.01" value="1500" required>
-
-    <label>Policy type</label>
-    <select name="policy_type">
-      <option>Basic</option>
-      <option selected>Standard</option>
-      <option>Premium</option>
-    </select>
-
-    <button type="submit">Run AI Co-Pilot Analysis &rarr;</button>
-  </form>
+<div class="navbar">
+  <div class="logo">
+    <div class="logo-icon">★</div>
+    INSURANCE SYSTEM CO-PILOT
+  </div>
+  <div class="tag">Insurance Claim Intelligence Platform</div>
 </div>
+
+<div class="steps">
+  <div class="step"><b>1. Submit</b>Upload photo & details</div>
+  <div class="step"><b>2. Analyze</b>AI predicts severity + payout</div>
+  <div class="step"><b>3. Review</b>Adjuster approves or edits</div>
+</div>
+
+<div class="hero">
+  <h1>Welcome to Car Insurance Claims Co-Pilot</h1>
+  <p>AI-assisted damage assessment with human-in-the-loop adjuster review.</p>
+</div>
+
+<div class="page">
+  <div class="panel">
+    <div class="panel-header">
+      <div class="badge">AI CLAIMS CO-PILOT &middot; INSURANCE</div>
+      <h1>Submit a Damage Claim</h1>
+      <p>Upload a photo, describe what happened, and provide claim details.</p>
+    </div>
+
+    <form action="/predict" method="post" enctype="multipart/form-data">
+      <div class="form-grid">
+        <div class="upload-box">
+          <div class="icon">📷</div>
+          <label class="title">Upload a photo</label>
+          <p>Damage photo of the vehicle</p>
+          <input type="file" name="photo" accept="image/*" required style="max-width:220px;">
+        </div>
+
+        <div class="fields-box">
+          <div class="field">
+            <label>Description of the incident</label>
+            <textarea name="description" placeholder="e.g. Rear bumper hit in a parking lot..." required></textarea>
+          </div>
+          <div class="field">
+            <label>Vehicle age (years)</label>
+            <input type="number" name="vehicle_age" min="0" max="30" value="5" required>
+          </div>
+          <div class="field">
+            <label>Claimed amount ($)</label>
+            <input type="number" name="claimed_amount" min="0" step="0.01" value="1500" required>
+          </div>
+          <div class="field">
+            <label>Policy type</label>
+            <select name="policy_type">
+              <option>Basic</option>
+              <option selected>Standard</option>
+              <option>Premium</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="submit-row">
+        <button type="submit">Run AI Co-Pilot Analysis &rarr;</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<footer>
+  Built by <a href="#">Saad Hassan</a> &middot; AI Claims Co-Pilot &copy; 2026
+</footer>
+
 </body>
 </html>

@@ -24,6 +24,7 @@ mid-demo.
 """
 
 import os
+import re
 import requests
 from dotenv import load_dotenv
 
@@ -35,15 +36,39 @@ OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 
 PAYOUT_MULTIPLIER = {"minor": 0.9, "moderate": 1.0, "severe": 1.15}
 
+AGE_MULTIPLIER_TABLE = [(2, 1.10), (5, 1.05), (10, 1.00), (15, 0.95), (999, 0.90)]
+POLICY_MULTIPLIER = {"Premium": 1.10, "Standard": 1.00, "Basic": 0.90}
 
-def suggested_payout(claimed_amount: float, severity: str, confidence: float) -> float:
+
+def _age_multiplier(vehicle_age: int) -> float:
+    for max_age, mult in AGE_MULTIPLIER_TABLE:
+        if vehicle_age <= max_age:
+            return mult
+    return 0.90
+
+
+def suggested_payout(claimed_amount: float, severity: str, confidence: float,
+                      vehicle_age: int = 5, policy_type: str = "Standard") -> float:
     """Deterministic payout calculation -- NEVER done by the LLM."""
-    mult = PAYOUT_MULTIPLIER.get(severity, 1.0)
-    # Low model confidence -> recommend paying closer to the claimed amount
-    # and flagging for closer human review, rather than aggressively adjusting.
-    confidence_adj = 1 - (1 - confidence) * 0.3
-    return round(claimed_amount * mult * confidence_adj, 2)
+    if severity == "minor":
+        base = claimed_amount * 0.9 if claimed_amount <= 1000 else 900
+    elif severity == "moderate":
+        base = claimed_amount * 0.9 if claimed_amount <= 2000 else 1900
+    elif severity == "severe":
+        if claimed_amount < 3000:
+            base = claimed_amount * 1.3
+        elif claimed_amount <= 5000:
+            base = claimed_amount
+        else:
+            base = 5000
+    else:
+        base = claimed_amount
 
+    age_mult = _age_multiplier(vehicle_age)
+    policy_mult = POLICY_MULTIPLIER.get(policy_type, 1.00)
+    confidence_adj = 1 - (1 - confidence) * 0.3
+
+    return round(base * age_mult * policy_mult * confidence_adj, 2)
 
 def _rule_based_summary(description, severity, conf_pct, vehicle_age,
                          claimed_amount, policy_type, payout) -> str:
@@ -80,9 +105,14 @@ def _build_prompt(description, severity, conf_pct, vehicle_age,
         f"Policy type: {policy_type}\n"
         f"Claimed amount: ${claimed_amount:,.2f}\n"
         f"Computed suggested payout: ${payout:,.2f}\n\n"
-        "Write the summary now. Mention the severity, your confidence-based "
-        "recommendation (approve quickly vs. manual review, based on the "
-        "confidence level), and the suggested payout. Do not use markdown."
+        "Write the summary now in exactly 3-4 complete sentences. Mention the "
+        "severity, your confidence-based recommendation (approve quickly vs. "
+        "manual review, based on the confidence level), and the suggested "
+        "payout. Do not use markdown.\n\n"
+        "IMPORTANT: Do not show any reasoning, thinking, or planning. Output "
+        "ONLY the final summary, wrapped exactly like this, with nothing "
+        "before or after:\n"
+        "<ANSWER>your 3-4 sentence summary here</ANSWER>"
     )
 
 
@@ -99,14 +129,16 @@ def _call_openrouter(prompt: str):
             json={
                 "model": OPENROUTER_MODEL,
                 "messages": [{"role": "user", "content": prompt}],
-                "max_tokens": 250,
+                "max_tokens": 400,
                 "temperature": 0.4,
             },
             timeout=20,
         )
         resp.raise_for_status()
         data = resp.json()
-        return data["choices"][0]["message"]["content"].strip()
+        raw = data["choices"][0]["message"]["content"].strip()
+        match = re.search(r"<ANSWER>(.*?)</ANSWER>", raw, re.DOTALL | re.IGNORECASE)
+        return match.group(1).strip() if match else None
     except Exception as e:
         print(f"[llm_reasoning] OpenRouter call failed, using fallback summary: {e}")
         return None
@@ -115,7 +147,7 @@ def _call_openrouter(prompt: str):
 def summarize(description: str, severity: str, confidence: float,
               vehicle_age: int, claimed_amount: float, policy_type: str):
     conf_pct = round(confidence * 100, 1)
-    payout = suggested_payout(claimed_amount, severity, confidence)
+    payout = suggested_payout(claimed_amount, severity, confidence, vehicle_age, policy_type)
 
     prompt = _build_prompt(description, severity, conf_pct, vehicle_age,
                             claimed_amount, policy_type, payout)

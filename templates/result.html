@@ -4,19 +4,45 @@
 <meta charset="utf-8">
 <title>Claim #{{ claim_id }} Finalized</title>
 <style>
-  body { font-family: -apple-system, Segoe UI, Roboto, sans-serif; background:#0f1420; color:#e8ecf5; display:flex; align-items:center; justify-content:center; height:100vh; margin:0;}
-  .card { background:#1a2032; padding:40px; border-radius:16px; text-align:center; max-width:420px; box-shadow:0 8px 30px rgba(0,0,0,.4);}
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, Segoe UI, Roboto, sans-serif; background:#0a0e27; color:#e8ecf5; margin:0;
+    display:flex; flex-direction:column; min-height:100vh; }
+
+  .navbar { display:flex; align-items:center; justify-content:space-between; padding:16px 32px;
+    background:#1a1035; border-bottom:1px solid #2e1f5e; }
+  .navbar .logo { display:flex; align-items:center; gap:10px; font-weight:700; font-size:16px; letter-spacing:.03em; }
+  .navbar .logo-icon { width:32px; height:32px; border-radius:50%;
+    background: linear-gradient(135deg,#7b2ff7,#00e5ff); display:flex; align-items:center; justify-content:center; font-size:16px; }
+  .navbar .tag { font-size:12px; color:#9aa4bf; }
+
+  .center { flex:1; display:flex; align-items:center; justify-content:center; padding:20px; }
+  .card { background:#1a1035; padding:40px; border-radius:20px; text-align:center; max-width:420px;
+    box-shadow:0 12px 40px rgba(0,0,0,.5); border:1px solid #2e1f5e; }
   h1 { font-size:20px; margin-bottom:8px;}
   p { color:#9aa4bf; font-size:14px; }
-  a.btn { display:inline-block; margin-top:20px; padding:12px 22px; background: linear-gradient(135deg,#5b7cfa,#7b5bfa); color:white; border-radius:9px; text-decoration:none; font-weight:600;}
-  a.new { display:block; margin-top:14px; color:#8fd0ff; font-size:13px; text-decoration:none;}
+  a.btn { display:inline-block; margin-top:20px; padding:12px 28px;
+    background: linear-gradient(135deg,#7b2ff7,#00e5ff); color:#0a0e27; border-radius:9px; text-decoration:none; font-weight:700;}
+  a.new { display:block; margin-top:14px; color:#00e5ff; font-size:13px; text-decoration:none;}
   .pill { display:inline-block; padding:4px 14px; border-radius:20px; font-weight:700; font-size:13px; margin-bottom:12px;}
-  .approved { background:#1e3a2a; color:#7be8a3;}
-  .rejected { background:#3a1e1e; color:#f08080;}
-  .edited { background:#232b45; color:#8fd0ff;}
+  .approved { background:#123a2e; color:#7be8a3;}
+  .rejected { background:#3a1e2a; color:#f08080;}
+  .edited { background:#2e1f5e; color:#00e5ff;}
+
+  footer { text-align:center; padding:24px; color:#5f6a8a; font-size:12px; }
+  footer a { color:#00e5ff; text-decoration:none; }
 </style>
 </head>
 <body>
+
+<div class="navbar">
+  <div class="logo">
+    <div class="logo-icon">★</div>
+    INSURANCE SYSTEM CO-PILOT
+  </div>
+  <div class="tag">Insurance Claim Intelligence Platform</div>
+</div>
+
+<div class="center">
   <div class="card">
     <div class="pill {{ decision }}">{{ decision.upper() }}</div>
     <h1>Claim #{{ claim_id }} finalized</h1>
@@ -24,5 +50,11 @@
     <a class="btn" href="/download/{{ claim_id }}">Download PDF Report</a>
     <a class="new" href="/">&larr; Submit another claim</a>
   </div>
+</div>
+
+<footer>
+  Built by <a href="#">Saad Hassan</a> &middot; AI Claims Co-Pilot &copy; 2026
+</footer>
+
 </body>
 </html>
