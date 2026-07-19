@@ -108,12 +108,15 @@ Claimant Upload (photo + text + tabular)
 | Business model | See below |
 
 
-Demo login: Car Key CAR-001 (or any CAR-002–CAR-050) · Password 995565
+## Demo login: 
+
+Car Key CAR-001 (or any CAR-002–CAR-050) · Password 995565
 
 Car Owner Login
 Log in with a car key + password before filing a claim. Vehicle age and policy type come from cars_dataset.csv and are locked (not editable) — age is calculated live from purchase_year, so it auto-increases every year.
 
-File List : 
+## File List : 
+
 auth.py, cars_dataset.csv          → login + car data
 templates/login.html, car_info.html → login pages
 
