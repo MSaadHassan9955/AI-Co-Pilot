@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insurance System Co-Pilot | Your Vehicle</title>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, Segoe UI, Roboto, sans-serif; background:#0a0e27; color:#e8ecf5; margin:0; padding:0;}
+
+  .navbar { display:flex; align-items:center; justify-content:space-between; padding:16px 32px;
+    background:#1a1035; border-bottom:1px solid #2e1f5e; }
+  .navbar .logo { display:flex; align-items:center; gap:10px; font-weight:700; font-size:16px; letter-spacing:.03em; }
+  .navbar .logo-icon { width:32px; height:32px; border-radius:50%;
+    background: linear-gradient(135deg,#7b2ff7,#00e5ff); display:flex; align-items:center; justify-content:center; font-size:16px; }
+  .navbar .tag { font-size:12px; color:#9aa4bf; }
+
+  .hero { text-align:center; padding: 20px 20px 8px; }
+  .hero h1 { font-size:26px; margin:0 0 8px; color:#e8ecf5; }
+  .hero p { color:#9aa4bf; font-size:14px; margin:0; }
+
+  .steps { display:flex; gap:14px; max-width:900px; margin:0 auto 24px; padding:0 20px; }
+  .step { flex:1; background:#1a1035; border:1px solid #2e1f5e; border-radius:10px; padding:12px; text-align:center; font-size:12px; color:#9aa4bf;}
+  .step b { display:block; color:#00e5ff; font-size:13px; margin-bottom:2px;}
+  .step.active { border-color:#7b2ff7; }
+  .step.active b { color:#a855f7; }
+
+  .page { max-width: 700px; margin: 20px auto 60px; padding: 0 20px; }
+
+  .panel { background:#1a1035; border-radius: 22px; border:1px solid #2e1f5e;
+    box-shadow: 0 12px 40px rgba(0,0,0,.5); padding: 36px 40px 40px; }
+
+  .panel-header { text-align:center; margin-bottom: 30px; }
+  .badge { display:inline-block; background:#2e1f5e; color:#00e5ff; font-size:11px; padding:4px 12px;
+    border-radius:20px; margin-bottom:14px; letter-spacing:.05em; font-weight:700; }
+  .panel-header h1 { font-size:24px; margin:0 0 8px; letter-spacing:.03em;
+    background: linear-gradient(90deg,#00e5ff,#a855f7); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .panel-header p { color:#9aa4bf; font-size:14px; margin:0; max-width:440px; margin:0 auto; }
+
+  .form-grid { display:grid; grid-template-columns: 1.4fr 1fr; gap: 24px; align-items:stretch; }
+
+  .fields-box { background:#0a0e27; border:1px solid #2e1f5e; border-radius:16px; padding: 22px 24px; display:flex; flex-direction:column; gap:16px; }
+  .fields-box .field label { display:block; margin: 0 0 6px; font-size: 11px; color:#8a90ad; text-transform:uppercase; letter-spacing:.04em; }
+  .fields-box .field .value { font-size:18px; font-weight:700; color:#e8ecf5; }
+  .fields-box .field .value.locked::after { content: " 🔒"; font-size:12px; opacity:.6; }
+
+  .plate-box { background:#0a0e27; border:2px dashed #3a2a6e; border-radius:16px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding: 28px 16px; text-align:center; }
+  .plate { background: linear-gradient(135deg,#7b2ff7,#00e5ff); color:#0a0e27; font-weight:900; font-size:19px;
+    padding: 16px 10px; border-radius: 10px; text-align:center; letter-spacing:1px; width: 100%; }
+  .plate-caption { font-size:11px; color:#8a90ad; margin-top:12px; }
+
+  .submit-row { text-align:center; margin-top: 28px; }
+  button { padding:13px 48px; border:none; border-radius:9px; width:100%;
+    background: linear-gradient(135deg,#7b2ff7,#00e5ff); color:#0a0e27; font-size:15px; font-weight:700; cursor:pointer;}
+  button:hover { opacity:.9; }
+  a.logout { display:block; margin-top:16px; text-align:center; color:#8a90ad; font-size:12px; text-decoration:none; }
+
+  footer { text-align:center; padding:24px; color:#5f6a8a; font-size:12px; }
+  footer a { color:#00e5ff; text-decoration:none; }
+
+  @media (max-width: 640px) {
+    .form-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="navbar">
+  <div class="logo">
+    <div class="logo-icon">★</div>
+    INSURANCE SYSTEM CO-PILOT
+  </div>
+  <div class="tag">Insurance Claim Intelligence Platform</div>
+</div>
+
+<div class="steps">
+  <div class="step active"><b>1. Verify</b>Vehicle confirmed</div>
+  <div class="step"><b>2. Submit</b>Upload photo & details</div>
+  <div class="step"><b>3. Review</b>Adjuster approves or edits</div>
+</div>
+
+<div class="hero">
+  <h1>Your Vehicle Details</h1>
+  <p>These details are pulled from your registered record and cannot be edited.</p>
+</div>
+
+<div class="page">
+  <div class="panel">
+    <div class="panel-header">
+      <div class="badge">AI CLAIMS CO-PILOT &middot; VEHICLE CONFIRMED</div>
+      <h1>Registered Vehicle</h1>
+      <p>Confirm your details below, then continue to file a claim.</p>
+    </div>
+
+    <div class="form-grid">
+      <div class="fields-box">
+        <div class="field">
+          <label>Vehicle Age</label>
+          <div class="value locked">{{ car.vehicle_age }} years</div>
+        </div>
+        <div class="field">
+          <label>Policy Type</label>
+          <div class="value locked">{{ car.policy_type }}</div>
+        </div>
+        <div class="field">
+          <label>Car Key</label>
+          <div class="value">{{ car.car_key }}</div>
+        </div>
+      </div>
+
+      <div class="plate-box">
+        <div class="plate">{{ car.number_plate }}</div>
+        <div class="plate-caption">Registered Number Plate</div>
+      </div>
+    </div>
+
+    <form action="/claim" method="get">
+      <div class="submit-row">
+        <button type="submit">Continue to File a Claim &rarr;</button>
+      </div>
+    </form>
+    <a class="logout" href="/logout">Log out</a>
+  </div>
+</div>
+
+<footer>
+  Built by <a href="#">Saad Hassan</a> &middot; AI Claims Co-Pilot &copy; 2026
+</footer>
+
+</body>
+</html>

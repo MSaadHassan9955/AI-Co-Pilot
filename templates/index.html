@@ -52,6 +52,12 @@
   input:focus, select:focus, textarea:focus { outline:none; border-color:#00e5ff; }
   textarea { min-height: 64px; resize: vertical;}
 
+  .locked-row { display:flex; gap:12px; margin-bottom: 18px; }
+  .locked-pill { flex:1; background:#151233; border:1px solid #3a2a6e; border-radius:10px; padding:10px 12px; }
+  .locked-pill .l-label { font-size:10px; color:#8a90ad; text-transform:uppercase; letter-spacing:.04em; }
+  .locked-pill .l-value { font-size:14px; font-weight:700; color:#e8ecf5; }
+  .locked-pill .l-value::after { content: " 🔒"; font-size:10px; opacity:.6; }
+
   .submit-row { text-align:center; margin-top: 28px; }
   button { padding:13px 48px; border:none; border-radius:9px;
     background: linear-gradient(135deg,#7b2ff7,#00e5ff); color:#0a0e27; font-size:15px; font-weight:700; cursor:pointer;}
@@ -60,12 +66,15 @@
   .steps { display:flex; gap:14px; max-width:900px; margin:0 auto 24px; padding:0 20px; }
   .step { flex:1; background:#1a1035; border:1px solid #2e1f5e; border-radius:10px; padding:12px; text-align:center; font-size:12px; color:#9aa4bf;}
   .step b { display:block; color:#00e5ff; font-size:13px; margin-bottom:2px;}
+  .step.active { border-color:#7b2ff7; }
+  .step.active b { color:#a855f7; }
 
   footer { text-align:center; padding:24px; color:#5f6a8a; font-size:12px; }
   footer a { color:#00e5ff; text-decoration:none; }
 
   @media (max-width: 640px) {
     .form-grid { grid-template-columns: 1fr; }
+    .locked-row { flex-direction:column; }
   }
 </style>
 </head>
@@ -80,8 +89,8 @@
 </div>
 
 <div class="steps">
-  <div class="step"><b>1. Submit</b>Upload photo & details</div>
-  <div class="step"><b>2. Analyze</b>AI predicts severity + payout</div>
+  <div class="step"><b>1. Verify</b>Vehicle confirmed</div>
+  <div class="step active"><b>2. Submit</b>Upload photo & details</div>
   <div class="step"><b>3. Review</b>Adjuster approves or edits</div>
 </div>
 
@@ -95,7 +104,22 @@
     <div class="panel-header">
       <div class="badge">AI CLAIMS CO-PILOT &middot; INSURANCE</div>
       <h1>Submit a Damage Claim</h1>
-      <p>Upload a photo, describe what happened, and provide claim details.</p>
+      <p>Upload a photo and describe what happened. Your vehicle age and policy are locked from your login.</p>
+    </div>
+
+    <div class="locked-row">
+      <div class="locked-pill">
+        <div class="l-label">Number Plate</div>
+        <div class="l-value">{{ car.number_plate }}</div>
+      </div>
+      <div class="locked-pill">
+        <div class="l-label">Vehicle Age</div>
+        <div class="l-value">{{ car.vehicle_age }} yrs</div>
+      </div>
+      <div class="locked-pill">
+        <div class="l-label">Policy Type</div>
+        <div class="l-value">{{ car.policy_type }}</div>
+      </div>
     </div>
 
     <form action="/predict" method="post" enctype="multipart/form-data">
@@ -113,20 +137,8 @@
             <textarea name="description" placeholder="e.g. Rear bumper hit in a parking lot..." required></textarea>
           </div>
           <div class="field">
-            <label>Vehicle age (years)</label>
-            <input type="number" name="vehicle_age" min="0" max="30" value="5" required>
-          </div>
-          <div class="field">
             <label>Claimed amount ($)</label>
             <input type="number" name="claimed_amount" min="0" step="0.01" value="1500" required>
-          </div>
-          <div class="field">
-            <label>Policy type</label>
-            <select name="policy_type">
-              <option>Basic</option>
-              <option selected>Standard</option>
-              <option>Premium</option>
-            </select>
           </div>
         </div>
       </div>

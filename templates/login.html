@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insurance System Co-Pilot | Login</title>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, Segoe UI, Roboto, sans-serif; background:#0a0e27; color:#e8ecf5; margin:0; padding:0;}
+
+  .navbar { display:flex; align-items:center; justify-content:space-between; padding:16px 32px;
+    background:#1a1035; border-bottom:1px solid #2e1f5e; }
+  .navbar .logo { display:flex; align-items:center; gap:10px; font-weight:700; font-size:16px; letter-spacing:.03em; }
+  .navbar .logo-icon { width:32px; height:32px; border-radius:50%;
+    background: linear-gradient(135deg,#7b2ff7,#00e5ff); display:flex; align-items:center; justify-content:center; font-size:16px; }
+  .navbar .tag { font-size:12px; color:#9aa4bf; }
+
+  .hero { text-align:center; padding: 20px 20px 8px; }
+  .hero h1 { font-size:26px; margin:0 0 8px; color:#e8ecf5; }
+  .hero p { color:#9aa4bf; font-size:14px; margin:0; }
+
+  .page { max-width: 480px; margin: 20px auto 60px; padding: 0 20px; }
+
+  .panel { background:#1a1035; border-radius: 22px; border:1px solid #2e1f5e;
+    box-shadow: 0 12px 40px rgba(0,0,0,.5); padding: 36px 40px 40px; }
+
+  .panel-header { text-align:center; margin-bottom: 30px; }
+  .badge { display:inline-block; background:#2e1f5e; color:#00e5ff; font-size:11px; padding:4px 12px;
+    border-radius:20px; margin-bottom:14px; letter-spacing:.05em; font-weight:700; }
+  .panel-header h1 { font-size:24px; margin:0 0 8px; letter-spacing:.03em;
+    background: linear-gradient(90deg,#00e5ff,#a855f7); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .panel-header p { color:#9aa4bf; font-size:14px; margin:0; max-width:380px; margin:0 auto; }
+
+  .fields-box { background:#0a0e27; border:1px solid #2e1f5e; border-radius:16px; padding: 22px 24px; }
+  .fields-box label { display:block; margin: 0 0 6px; font-size: 12px; color:#b7c0da; font-weight:600;}
+  .fields-box .field { margin-bottom: 16px; }
+  .fields-box .field:last-child { margin-bottom: 0; }
+  input[type=text], input[type=password] {
+    width:100%; padding:10px 12px; border-radius:8px; border:1px solid #3a2a6e;
+    background:#151233; color:#e8ecf5; font-size:14px; box-sizing:border-box;
+  }
+  input:focus { outline:none; border-color:#00e5ff; }
+
+  .submit-row { text-align:center; margin-top: 28px; }
+  button { padding:13px 48px; border:none; border-radius:9px; width:100%;
+    background: linear-gradient(135deg,#7b2ff7,#00e5ff); color:#0a0e27; font-size:15px; font-weight:700; cursor:pointer;}
+  button:hover { opacity:.9; }
+
+  .error { background:#3a1030; border:1px solid #7a1f4a; color:#ff8fb3; padding:12px 14px;
+    border-radius:10px; font-size:13px; margin-bottom:20px; text-align:center; }
+
+  footer { text-align:center; padding:24px; color:#5f6a8a; font-size:12px; }
+  footer a { color:#00e5ff; text-decoration:none; }
+</style>
+</head>
+<body>
+
+<div class="navbar">
+  <div class="logo">
+    <div class="logo-icon">★</div>
+    INSURANCE SYSTEM CO-PILOT
+  </div>
+  <div class="tag">Insurance Claim Intelligence Platform</div>
+</div>
+
+<div class="hero">
+  <h1>Welcome to Car Insurance Claims Co-Pilot</h1>
+  <p>Log in with your registered car key to access your claim portal.</p>
+</div>
+
+<div class="page">
+  <div class="panel">
+    <div class="panel-header">
+      <div class="badge">AI CLAIMS CO-PILOT &middot; LOGIN</div>
+      <h1>Car Owner Login</h1>
+      <p>Enter your car key and password to continue.</p>
+    </div>
+
+    {% if error %}
+    <div class="error">{{ error }}</div>
+    {% endif %}
+
+    <form action="/login" method="post">
+      <div class="fields-box">
+        <div class="field">
+          <label>Car Key</label>
+          <input type="text" name="car_key" placeholder="e.g. CAR-001" required autofocus>
+        </div>
+        <div class="field">
+          <label>Password</label>
+          <input type="password" name="password" required>
+        </div>
+      </div>
+
+      <div class="submit-row">
+        <button type="submit">Login &rarr;</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<footer>
+  Built by <a href="#">Saad Hassan</a> &middot; AI Claims Co-Pilot &copy; 2026
+</footer>
+
+</body>
+</html>
