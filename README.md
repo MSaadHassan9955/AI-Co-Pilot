@@ -1,3 +1,9 @@
+## Demo login: 
+
+## Car Key :"CAR-001" to "CAR-050" (or any CAR-002–CAR-050) · 
+## Password : "995565"
+
+
 Created By: Muhammad Saad Hassan
 
 Live App Link : https://ai-co-pilot-production.up.railway.app
@@ -107,10 +113,6 @@ Claimant Upload (photo + text + tabular)
 | Downloadable report | `report_gen.py` — PDF via reportlab, includes photo, heatmap, prediction, confidences, adjuster decision |
 | Business model | See below |
 
-
-## Demo login: 
-
-Car Key CAR-001 (or any CAR-002–CAR-050) · Password 995565
 
 Car Owner Login
 Log in with a car key + password before filing a claim. Vehicle age and policy type come from cars_dataset.csv and are locked (not editable) — age is calculated live from purchase_year, so it auto-increases every year.
